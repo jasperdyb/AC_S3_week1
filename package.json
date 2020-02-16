@@ -4,7 +4,9 @@
   "description": "",
   "dependencies": {
     "express": "^4.17.1",
-    "handlebars": "^4.7.3"
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.7.3",
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {},
   "main": "app.js",
