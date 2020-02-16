@@ -47,7 +47,7 @@ nodemon app.js
 ```
 若正確啟動顯示如下
 
-![started](https://github.com/jasperdyb/AC_S3_week1/started.png)
+![started](https://github.com/jasperdyb/AC_S3_week1/blob/master/started.PNG)
 
 6. 於瀏覽器輸入 http://localhost:3000/ 顯示頁面
 
