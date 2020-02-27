@@ -7,8 +7,9 @@ const port = 3000
 const restaurant_list = require('./restaurant.json')
 
 
-app.engine('handlebars', exphbs({ defaultLayout: 'Main' }))
-app.set('view engine', 'handlebars')
+// app.engine('handlebars', exphbs({ defaultLayout: 'Main' }))
+// app.set('view engine', 'handlebars')
+app.set('view engine', 'pug')
 
 app.use(express.static('public'))
 
