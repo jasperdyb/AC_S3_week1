@@ -114,7 +114,15 @@ app.get('/delete/', (req, res) => {
 
 app.get('/:id/delete', (req, res) => {
   console.log(req.params.id)
-  res.redirect('/')
+
+  Restaurants.findById(req.params.id, (err, restaurants) => {
+    if (err) return console.error(err)
+    restaurants.remove(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  })
+
 })
 
 // server start
