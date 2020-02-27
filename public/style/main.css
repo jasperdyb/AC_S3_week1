@@ -116,11 +116,11 @@ header {
 } */
 
 
-.card{
+.restaurant{
   position: relative;
 }
 
-.card .delete-button {
+.restaurant .delete-button-form {
     display: none;
     position: absolute;
     top: 3px;

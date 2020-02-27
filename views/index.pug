@@ -1,8 +1,9 @@
 extends main.pug
 
 block view
-  
 
+  
+  //- index
   div(class="container search-bar")
     div(class="search-bar-outer")
       div(class="search-bar-inner")
@@ -21,25 +22,42 @@ block view
       div(class="col-md-10 col-12 mx-auto")
         div(class="card-columns")
           each restaurant in restaurants
-            a(href="/restaurants/" + restaurant._id class="text-secondary")
-              div(class="card mb-3")
-                form(action="/"+restaurant._id+"/delete" class="delete-button")
-                    button(type="submit" class="btn btn-danger btn-sm rounded-circle")
-                      i(class="fas fa-trash my-1")
-                img(class="card-img-top" src= restaurant.image alt=restaurant.name)
-                div(class="card-body p-3")
-                  h6(class="card-title mb-1") #{restaurant.name}
-                  div(class="restaurant-category mb-1")
-                    i(class="fas fa-utensils pr-2") #{restaurant.category} 
-                  span(class="badge badge-pill badge-danger font-weight-normal") #{restaurant.rating} 
-                    i(class="fas fa-star fa-xs")
+            div(class='restaurant')
+              form(action="/"+restaurant._id+"/delete" class="delete-button-form")
+                button(type="button" class="btn btn-danger btn-sm rounded-circle delete-button" data-toggle="modal" data-target="#deletion" data-restaurant_id=restaurant._id)
+                  i(class="fas fa-trash my-1")
+              a(href="/restaurants/" + restaurant._id class="text-secondary")
+                div(class="card mb-3")
+                  img(class="card-img-top" src= restaurant.image alt=restaurant.name)
+                  div(class="card-body p-3")
+                    h6(class="card-title mb-1") #{restaurant.name}
+                    div(class="restaurant-category mb-1")
+                      i(class="fas fa-utensils pr-2") #{restaurant.category} 
+                    span(class="badge badge-pill badge-danger font-weight-normal") #{restaurant.rating} 
+                      i(class="fas fa-star fa-xs")
 
+  //- new & delete-toggle button
   div(id = "new-and-delete")
     form(action="/new", method="get")
       button(type="submit" class="btn btn-primary btn-lg rounded-circle" data-toggle="tooltip" data-placement="left" title="新增餐廳") 
         i(class="fas fa-plus my-2")
     button(class="btn btn-danger btn-lg rounded-circle"  id ="delete_button" data-toggle="tooltip" data-placement="left" title="刪除餐廳") 
       i(class="fas fa-trash my-2")
+
+  //- delete confirm modal
+  div(class="modal fade" id="deletion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+    div( class="modal-dialog" role="document")
+      div(class="modal-content")
+        div(class="modal-header")
+          h5(class="modal-title" id="exampleModalLabel") Delete confirmation
+          button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true") &times;
+        div(class="modal-body") Do you really want to delete this restaurant?
+        div(class="modal-footer")
+          button(type="button" class="btn btn-danger") Yes
+
+  
+
 
 block script
   script(src="/js/index.js")
