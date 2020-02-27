@@ -103,8 +103,18 @@ app.post('/:id/edit', (req, res) => {
 })
 
 //info delete
-app.get('/:id/remove', (req, res) => {
+app.get('/delete/', (req, res) => {
+  Restaurants.find()
+    .lean()
+    .exec((err, restaurants) => { // 把 model 所有的資料都抓回來
+      if (err) return console.error(err)
+      return res.render('index', { restaurants: restaurants, deleting: true }) // 將資料傳給 index 樣板
+    })
+})
 
+app.get('/:id/delete', (req, res) => {
+  console.log(req.params.id)
+  res.redirect('/')
 })
 
 // server start

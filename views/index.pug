@@ -23,6 +23,9 @@ block view
           each restaurant in restaurants
             a(href="/restaurants/" + restaurant._id class="text-secondary")
               div(class="card mb-3")
+                form(action="/"+restaurant._id+"/delete" class="delete-button")
+                    button(type="submit" class="btn btn-danger btn-sm rounded-circle")
+                      i(class="fas fa-trash my-1")
                 img(class="card-img-top" src= restaurant.image alt=restaurant.name)
                 div(class="card-body p-3")
                   h6(class="card-title mb-1") #{restaurant.name}
@@ -30,3 +33,21 @@ block view
                     i(class="fas fa-utensils pr-2") #{restaurant.category} 
                   span(class="badge badge-pill badge-danger font-weight-normal") #{restaurant.rating} 
                     i(class="fas fa-star fa-xs")
+
+  div(id = "new-and-delete")
+    form(action="/new", method="get")
+      button(type="submit" class="btn btn-primary btn-lg rounded-circle" data-toggle="tooltip" data-placement="left" title="新增餐廳") 
+        i(class="fas fa-plus my-2")
+    button(class="btn btn-danger btn-lg rounded-circle"  id ="delete_button" data-toggle="tooltip" data-placement="left" title="刪除餐廳") 
+      i(class="fas fa-trash my-2")
+
+block script
+  script(src="/js/index.js")
+
+
+
+
+  
+    
+      
+    
