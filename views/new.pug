@@ -1,0 +1,43 @@
+extends main.pug
+
+block view
+  div(class="container search-bar")
+    div(class="search-bar-outer")
+      div(class="search-bar-inner")
+       form(action="/new", method="post")
+        div(class="form-group row")
+          div(class="col-6")
+            label(for="inputName" class="col-form-label" ) 店名 :
+            div
+              input(type="text" class="form-control" id="inputName" name='name' required)
+          div(class="col-6")
+            label(for="inputCategory" class="col-form-label" ) 類別 :
+            div
+              input(type="text" class="form-control" id="inputCategory" name='category' required)
+        div(class="form-group")
+          label(for="inputRating" class="col-form-label" ) 評分 :
+          input(type="range" class="custom-range" id="inputRating" name='rating'  min="0" max="5" step="0.5")
+        div(class="form-group row")
+          label(for="inputLocation" class="col-sm-3 col-form-label" ) 地址 :
+          div(class="col-sm-9") 
+            input(type="text" class="form-control" id="inputLocation" name='location' required)
+        div(class="form-group row")
+          label(for="inputMapLink" class="col-sm-3 col-form-label" ) 地圖連結 :
+          div(class="col-sm-9") 
+            input(type="text" class="form-control" id="inputMapLink" name='google_map')
+        div(class="form-group row")
+          label(for="inputPhone" class="col-sm-3 col-form-label" ) 電話 :
+          div(class="col-sm-9") 
+            input(type="text" class="form-control" id="inputPhone" name='phone' required)
+        div(class="form-group row")
+          label(for="inputPhotoLink" class="col-sm-3 col-form-label" ) 相片(連結) :
+          div(class="col-sm-9") 
+            input(type="text" class="form-control" id="inputPhotoLink" name='image' required)
+        div(class="form-group row")
+          label(for="inputDescription" class="col col-form-label" ) 介紹 :
+          div(class="col-sm-9") 
+            textarea(class="form-control" id="col-sm-3 inputDescription" name="description")
+        div(class="form-group row justify-content-center")
+          button(type="submit" class="btn btn-major " id="new-button") 新增
+
+          

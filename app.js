@@ -1,6 +1,6 @@
 const express = require('express')
-const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 const app = express()
 const port = 3000
@@ -10,6 +10,7 @@ const restaurant_list = require('./restaurant.json')
 app.set('view engine', 'pug')
 
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //Database connection
 mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })   // 設定連線到 mongoDB
@@ -29,7 +30,9 @@ db.once('open', () => {
 })
 
 
-// routers
+//Routers
+
+//main index page
 app.get('/', (req, res) => {
   let key = null
 
@@ -41,6 +44,7 @@ app.get('/', (req, res) => {
     })
 })
 
+//detail page
 app.get('/restaurants/:id', (req, res) => {
   Restaurants.findById(req.params.id)
     .lean()
@@ -51,19 +55,55 @@ app.get('/restaurants/:id', (req, res) => {
     })
 })
 
+//search result
 app.get('/search', (req, res) => {
   const key = req.query.keyword
 
   Restaurants.find()
     .lean()
-    .exec((err, restaurants) => { // 把 model 所有的資料都抓回來
+    .exec((err, restaurants) => {
       if (err) return console.error(err)
       restaurants_results = restaurants.filter(data => {
         return data.name.toLowerCase().includes(key.toLowerCase()) || data.category.toLowerCase().includes(key.toLowerCase())
       })
 
-      return res.render('index', { restaurants: restaurants_results, keyword: key }) // 將資料傳給 index 樣板
+      return res.render('index', { restaurants: restaurants_results, keyword: key })
     })
+
+})
+
+
+//add new info page
+app.get('/new', (req, res) => {
+  res.render('new')
+})
+
+//info added
+app.post('/new', (req, res) => {
+  console.log('new added!')
+  console.log(req.body)
+
+  const restaurant = new Restaurants(req.body)
+
+  restaurant.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')  // 新增完成後，將使用者導回首頁
+  })
+  // res.render('new')
+})
+
+//info update page
+app.get('/:id/edit', (req, res) => {
+
+})
+
+//info updated
+app.post('/:id/edit', (req, res) => {
+
+})
+
+//info delete
+app.get('/:id/remove', (req, res) => {
 
 })
 
