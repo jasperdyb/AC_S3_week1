@@ -9,9 +9,9 @@ block view
       div(class="search-bar-inner")
         //-若頁面帶著id資訊，表示為edit功能，變更form連結
         if restaurant._id
-          -let form_link = "/"+restaurant._id+"/edit"
+          -let form_link = "/restaurants/"+restaurant._id+"/edit"
         else
-          -let form_link= "/new"
+          -let form_link= "/restaurants/new"
         form(action= form_link, method="post")
           div(class="form-group row")
             div(class="col-6")

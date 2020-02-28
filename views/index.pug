@@ -29,7 +29,7 @@ block view
           each restaurant in restaurants
             div(class='restaurant')
               //-刪除按鈕，平時隱藏
-              form(action="/"+restaurant._id+"/delete" class="delete-button-form")
+              form(action="/restaurants/"+restaurant._id+"/delete" class="delete-button-form")
                 button(type="button" class="btn btn-danger btn-sm rounded-circle delete-button" data-toggle="modal" data-target="#deletion" data-restaurant_id=restaurant._id)
                   i(class="fas fa-trash my-1")
               a(href="/restaurants/" + restaurant._id class="text-secondary")
@@ -45,7 +45,7 @@ block view
 
   //- new & delete-toggle button
   div(id = "corner-button")
-    form(action="/new", method="get")
+    form(action="/restaurants/new", method="get")
       button(type="submit" class="btn btn-primary btn-lg rounded-circle" data-toggle="tooltip" data-placement="left" title="新增餐廳") 
         i(class="fas fa-plus my-2")
     //-切替顯示刪除按鈕        

@@ -14,8 +14,7 @@ $('#delete_toggle').click(function () {
 $('.delete-button').click(function (e) {
   e.stopPropagation()
   id = $(e.currentTarget).data('restaurant_id')
-  console.log($(e.currentTarget).data('restaurant_id'))
   $("#deletion").modal()
-  $('#deletion-confirm').attr('action', `/${id}/delete`)
+  $('#deletion-confirm').attr('action', `/restaurants/${id}/delete`)
 })
 
