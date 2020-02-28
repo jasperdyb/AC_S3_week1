@@ -29,9 +29,8 @@ block view
           each restaurant in restaurants
             div(class='restaurant')
               //-刪除按鈕，平時隱藏
-              form(action="/restaurants/"+restaurant._id+"/delete" class="delete-button-form")
-                button(type="button" class="btn btn-danger btn-sm rounded-circle delete-button" data-toggle="modal" data-target="#deletion" data-restaurant_id=restaurant._id)
-                  i(class="fas fa-trash my-1")
+              button(type="button" class="btn btn-danger btn-sm rounded-circle delete-button" data-toggle="modal" data-target="#deletion" data-restaurant_id=restaurant._id)
+                i(class="fas fa-trash my-1")
               a(href="/restaurants/" + restaurant._id class="text-secondary")
                 div(class="card mb-3")
                   img(class="card-img-top" src= restaurant.image alt=restaurant.name)
@@ -62,7 +61,7 @@ block view
             span(aria-hidden="true") &times;
         div(class="modal-body") 確定要刪除餐廳?
         div(class="modal-footer")
-          form(action="#" id="deletion-confirm" method="get")
+          form(action="#" id="deletion-confirm" method="POST")
             button(type="submit" class="btn btn-danger") 是
 
   

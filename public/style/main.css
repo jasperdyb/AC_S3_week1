@@ -120,7 +120,7 @@ header {
   position: relative;
 }
 
-.restaurant .delete-button-form {
+.restaurant .delete-button {
     display: none;
     position: absolute;
     top: 3px;

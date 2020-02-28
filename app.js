@@ -57,6 +57,10 @@ app.get('/', (req, res) => {
 app.get('/search', (req, res) => {
   const key = req.query.keyword
 
+  if (!key) {
+    res.redirect('/')
+  }
+
   Restaurants.find()
     .lean()
     .exec((err, restaurants) => {
