@@ -75,7 +75,8 @@ app.get('/search', (req, res) => {
 
 //add new info page
 app.get('/new', (req, res) => {
-  res.render('new')
+  restaurant_null = {}
+  res.render('new', { restaurant: restaurant_null })
 })
 
 //info added
@@ -94,12 +95,35 @@ app.post('/new', (req, res) => {
 
 //info update page
 app.get('/:id/edit', (req, res) => {
-  res.render('new')
+
+  Restaurants.findById(req.params.id)
+    .lean()
+    .exec((err, restaurant) => {
+      if (err) return console.error(err)
+      // console.log(restaurant)
+      return res.render('new', { restaurant })
+    })
+
 })
 
 //info updated
 app.post('/:id/edit', (req, res) => {
+  Restaurants.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    console.log(restaurant)
+    // restaurant = req.body
+    // restaurant = new Restaurants(req.body)
+    for (var key in req.body) {
+      // console.log(key)
+      // console.log(restaurant[key])
+      restaurant[key] = req.body[key]
+    }
 
+    restaurant.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/restaurants/${req.params.id}/`)
+    })
+  })
 })
 
 //info delete

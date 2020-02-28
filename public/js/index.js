@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-  jQuery('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip()
 })
 
 $('#delete_toggle').click(function () {
@@ -18,3 +18,4 @@ $('.delete-button').click(function (e) {
   $("#deletion").modal()
   $('#deletion-confirm').attr('action', `/${id}/delete`)
 })
+
