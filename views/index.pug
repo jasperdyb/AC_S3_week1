@@ -4,22 +4,20 @@ block view
 
   
   //- index
-  div(class="container search-bar")
-    div(class="search-bar-outer")
-      div(class="search-bar-inner row d-flex justify-content-between align-items-center")
-        form(action="/search", method="get" class="col-8 m-0" )
-          div(class="input-group")
-            input(type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類進行搜尋" aria-label="Restaurant Name..." value= keyword aria-describedby="search-button")
+  div(class="search-bar ")
+    div(class="search-bar-outer ")
+      div(class="search-bar-inner container")
+        form(action="/search", method="get" ,class="row justify-content-between align-items-center mb-0")
+          div(class="input-group col-7 p-0" )
+            input(type="text" name="searchKey" class="form-control" placeholder="輸入餐廳、分類進行搜尋" aria-label="Restaurant Name..." value= searchKey aria-describedby="search-button")
             div(class="input-group-append")
               button(type="submit" class="btn btn-major" id="search-button")
                 i(class="fas fa-search")
-        div(class="dropdown col-2")
-          button(class="btn btn-secondary dropdown-toggle col-12" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") 排序
-          div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-            a(class="dropdown-item" href="/name") 名稱
-            a(class="dropdown-item" href="/rating") 評分
-            a(class="dropdown-item" href="/category") 種類
-
+          select(class="form-control col-2" name="sortMethod" id="sort-method" )
+            option(value="default" selected= sortKey=="default"? 'selected': null) 排序
+            option(value="name" selected= sortKey=="name"? 'selected': null) 名稱
+            option(value="rating" selected= sortKey=="rating"? 'selected': null) 評分
+            option(value="category" selected= sortKey=="category"? 'selected': null) 種類
 
   div(class="container mt-5")
     div(class ="row")

@@ -17,3 +17,10 @@ $('.delete-button').click(function (e) {
   $("#deletion").modal()
   $('#deletion-confirm').attr('action', `/restaurants/${id}/delete?_method=DELETE`)
 })
+
+$('#sort-method').change(function (e) {
+  e.preventDefault()
+  method = $(e.currentTarget).val()
+  console.log(method)
+  this.form.submit()
+})
