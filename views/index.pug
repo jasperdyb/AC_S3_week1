@@ -6,15 +6,19 @@ block view
   //- index
   div(class="container search-bar")
     div(class="search-bar-outer")
-      div(class="search-bar-inner")
-       form(action="/search", method="get")
-        h4(class="mb-2") 尋找餐廳：
-        div(class="input-group")
-          input(type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." value= keyword aria-describedby="search-button")
-          div(class="input-group-append")
-            button(type="submit" class="btn btn-major" id="search-button")
-              i(class="fas fa-search")
-
+      div(class="search-bar-inner row d-flex justify-content-between align-items-center")
+        form(action="/search", method="get" class="col-8 m-0" )
+          div(class="input-group")
+            input(type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類進行搜尋" aria-label="Restaurant Name..." value= keyword aria-describedby="search-button")
+            div(class="input-group-append")
+              button(type="submit" class="btn btn-major" id="search-button")
+                i(class="fas fa-search")
+        div(class="dropdown col-2")
+          button(class="btn btn-secondary dropdown-toggle col-12" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") 排序
+          div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+            a(class="dropdown-item" href="#") 名稱
+            a(class="dropdown-item" href="#") 評分
+            a(class="dropdown-item" href="#") 種類
 
 
   div(class="container mt-5")
@@ -35,9 +39,9 @@ block view
                     h6(class="card-title mb-1") #{restaurant.name}
                     div(class="restaurant-category mb-1")
                       i(class="fas fa-utensils pr-2") #{restaurant.category} 
-                    div(class="row d-flex justify-content-between")
-                      span(class="badge badge-pill badge-danger font-weight-normal ml-1") #{restaurant.rating} 
-                        i(class="fas fa-star fa-xs")
+                    div(class="row")
+                      span(class="badge badge-pill badge-danger font-weight-normal col-2 ml-3 d-flex align-items-center") #{restaurant.rating} 
+                        i(class="fas fa-star fa-xs pl-1")
 
   //- new & delete-toggle button
   div(id = "corner-button")
