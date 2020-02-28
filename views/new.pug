@@ -7,6 +7,7 @@ block view
   div(class="container search-bar")
     div(class="search-bar-outer")
       div(class="search-bar-inner")
+        //-若頁面帶著id資訊，表示為edit功能，變更form連結
         if restaurant._id
           -let form_link = "/"+restaurant._id+"/edit"
         else
@@ -47,7 +48,8 @@ block view
             div(class="col-sm-9") 
               textarea(class="form-control" id="col-sm-3 inputDescription" name="description" value= restaurant.description? restaurant.description : null)
           div(class="form-group row justify-content-center")
-            button(type="submit" class="btn btn-major " id="new-button") 
+            button(type="submit" class="btn btn-major " id="new-button")
+              //-若頁面帶有id，表示為edit功能，變更顯示字樣
               if restaurant._id
                 |修改
               else 

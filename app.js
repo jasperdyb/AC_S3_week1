@@ -50,7 +50,6 @@ app.get('/restaurants/:id', (req, res) => {
     .lean()
     .exec((err, restaurant) => {
       if (err) return console.error(err)
-      // console.log(restaurant)
       return res.render('show', { restaurant: restaurant })
     })
 })
@@ -90,7 +89,6 @@ app.post('/new', (req, res) => {
     if (err) return console.error(err)
     return res.redirect('/')  // 新增完成後，將使用者導回首頁
   })
-  // res.render('new')
 })
 
 //info update page
@@ -100,8 +98,7 @@ app.get('/:id/edit', (req, res) => {
     .lean()
     .exec((err, restaurant) => {
       if (err) return console.error(err)
-      // console.log(restaurant)
-      return res.render('new', { restaurant })
+      return res.render('new', { restaurant }) //利用new頁面編輯資訊
     })
 
 })
@@ -111,11 +108,7 @@ app.post('/:id/edit', (req, res) => {
   Restaurants.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     console.log(restaurant)
-    // restaurant = req.body
-    // restaurant = new Restaurants(req.body)
     for (var key in req.body) {
-      // console.log(key)
-      // console.log(restaurant[key])
       restaurant[key] = req.body[key]
     }
 
