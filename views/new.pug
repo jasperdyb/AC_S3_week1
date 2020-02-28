@@ -46,7 +46,7 @@ block view
           div(class="form-group row")
             label(for="inputDescription" class="col col-form-label" ) 介紹 :
             div(class="col-sm-9") 
-              textarea(class="form-control" id="col-sm-3 inputDescription" name="description" value= restaurant.description? restaurant.description : null)
+              textarea(class="form-control" id="col-sm-3 inputDescription" name="description" value= restaurant.description? restaurant.description : null) #{restaurant.description? restaurant.description : null}
           div(class="form-group row justify-content-center")
             button(type="submit" class="btn btn-major " id="new-button")
               //-若頁面帶有id，表示為edit功能，變更顯示字樣
