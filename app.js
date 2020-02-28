@@ -94,7 +94,7 @@ app.post('/new', (req, res) => {
 
 //info update page
 app.get('/:id/edit', (req, res) => {
-
+  res.render('new')
 })
 
 //info updated

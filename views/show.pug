@@ -27,3 +27,9 @@ block view
           |#{restaurant.description}
 
         img(src=restaurant.image class="rounded mx-auto d-block mb-4 w-100"  alt=restaurant.name  style="max-width: 600px;")
+
+  //- modify button
+  div(id = "corner-button")
+    form(action="/"+restaurant._id+"/edit", method="get")
+      button(type="submit" class="btn btn-primary btn-lg rounded-circle" data-toggle="tooltip" data-placement="left" title="編輯資訊") 
+        i(class="fas fa-pencil-alt my-2")
