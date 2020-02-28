@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
 header {
   overflow: hidden;
 }
@@ -104,17 +107,9 @@ header {
 #corner-button{
   position: fixed;
   right: 1em;
-  bottom: 0;
+  bottom: 1em;
   margin-top: -2.5em;
 }
-
-/* #delete{
-  position: fixed;
-  left: 1em;
-  bottom: 0;
-  margin-top: -2.5em;
-} */
-
 
 .restaurant{
   position: relative;
