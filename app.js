@@ -52,7 +52,6 @@ app.get('/', (req, res) => {
 })
 
 
-
 //search result
 app.get('/search', (req, res) => {
   const key = req.query.keyword
@@ -72,6 +71,31 @@ app.get('/search', (req, res) => {
       return res.render('index', { restaurants: restaurants_results, keyword: key })
     })
 
+})
+
+//sort index
+app.get('/:sort', (req, res) => {
+  const key = null
+
+  switch (req.params.sort) {
+    case 'name':
+      method = { name: 'asc' }
+      break
+    case 'rating':
+      method = { rating: 'desc' }
+      break
+    case 'category':
+      method = { category: 'asc' }
+      break
+  }
+
+  Restaurants.find()
+    .sort(method)
+    .lean()
+    .exec((err, restaurants) => { // 把 model 所有的資料都抓回來
+      if (err) return console.error(err)
+      return res.render('index', { restaurants: restaurants, keyword: key }) // 將資料傳給 index 樣板
+    })
 })
 
 

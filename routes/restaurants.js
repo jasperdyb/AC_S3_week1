@@ -61,16 +61,6 @@ router.put('/:id', (req, res) => {
   })
 })
 
-//info delete
-// router.get('/delete/', (req, res) => {
-//   Restaurants.find()
-//     .lean()
-//     .exec((err, restaurants) => { // 把 model 所有的資料都抓回來
-//       if (err) return console.error(err)
-//       return res.render('index', { restaurants: restaurants, deleting: true }) // 將資料傳給 index 樣板
-//     })
-// })
-
 router.delete('/:id/delete', (req, res) => {
   Restaurants.findById(req.params.id, (err, restaurants) => {
     if (err) return console.error(err)
