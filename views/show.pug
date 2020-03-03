@@ -30,6 +30,6 @@ block view
 
   //- modify button
   div(id = "corner-button")
-    form(action="/restaurants/"+restaurant._id+"?_method=PUT", method="post")
+    form(action="/restaurants/"+restaurant._id+"/edit", method="get")
       button(type="submit" class="btn btn-primary btn-lg rounded-circle" data-toggle="tooltip" data-placement="left" title="編輯資訊") 
         i(class="fas fa-pencil-alt my-2")

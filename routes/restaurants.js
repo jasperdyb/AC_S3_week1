@@ -40,7 +40,7 @@ router.get('/:id/edit', (req, res) => {
     .lean()
     .exec((err, restaurant) => {
       if (err) return console.error(err)
-      return res.render('new', { restaurant }) //利用new頁面編輯資訊
+      return res.render('edit', { restaurant }) //利用new頁面編輯資訊
     })
 
 })
