@@ -9,7 +9,6 @@ const port = 3000
 const restaurant_list = require('./restaurant.json')
 
 app.set('view engine', 'pug')
-
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
@@ -88,31 +87,6 @@ app.get('/search', (req, res) => {
       return res.render('index', { restaurants: restaurants_results, searchKey: key, sortKey: methodKey })
     })
 
-})
-
-//sort index
-app.get('/:sort', (req, res) => {
-  const key = null
-
-  switch (req.params.sort) {
-    case 'name':
-      method = { name: 'asc' }
-      break
-    case 'rating':
-      method = { rating: 'desc' }
-      break
-    case 'category':
-      method = { category: 'asc' }
-      break
-  }
-
-  Restaurants.find()
-    .sort(method)
-    .lean()
-    .exec((err, restaurants) => { // 把 model 所有的資料都抓回來
-      if (err) return console.error(err)
-      return res.render('index', { restaurants: restaurants, keyword: key }) // 將資料傳給 index 樣板
-    })
 })
 
 
