@@ -2,27 +2,23 @@ const express = require('express')
 const router = express.Router()
 const Restaurants = require('../models/restaurants')
 
-
-
-
-//add new info page
+// add new info page
 router.get('/new', (req, res) => {
-  restaurant_null = {}
-  res.render('new', { restaurant: restaurant_null })
+  const restaurantNull = {}
+  res.render('new', { restaurant: restaurantNull })
 })
 
-//info added
+// info added
 router.post('/new', (req, res) => {
-
   const restaurant = new Restaurants(req.body)
 
   restaurant.save(err => {
     if (err) return console.error(err)
-    return res.redirect('/')  // 新增完成後，將使用者導回首頁
+    return res.redirect('/')// 新增完成後，將使用者導回首頁
   })
 })
 
-//detail page
+// detail page
 router.get('/:id', (req, res) => {
   Restaurants.findById(req.params.id)
     .lean()
@@ -32,20 +28,17 @@ router.get('/:id', (req, res) => {
     })
 })
 
-
-//info update page
+// info update page
 router.get('/:id/edit', (req, res) => {
-
   Restaurants.findById(req.params.id)
     .lean()
     .exec((err, restaurant) => {
       if (err) return console.error(err)
-      return res.render('edit', { restaurant }) //利用new頁面編輯資訊
+      return res.render('edit', { restaurant }) // 利用new頁面編輯資訊
     })
-
 })
 
-//info updated
+// info updated
 router.put('/:id', (req, res) => {
   Restaurants.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
@@ -69,8 +62,6 @@ router.delete('/:id/delete', (req, res) => {
       return res.redirect('/')
     })
   })
-
 })
-
 
 module.exports = router

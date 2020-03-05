@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Restaurants = require('../models/restaurants')
 
-//main index page
+// main index page
 router.get('/', (req, res) => {
-  let key = null
+  const key = null
 
   Restaurants.find()
     .sort({})
@@ -15,19 +15,20 @@ router.get('/', (req, res) => {
     })
 })
 
-
-//search result
+// search result
 router.get('/search', (req, res) => {
   const key = req.query.searchKey
   const methodKey = req.query.sortMethod
+  let method = {}
 
-  if (!key && (methodKey == 'default')) {
+  if (!key && (methodKey === 'default')) {
     res.redirect('/')
   }
 
   switch (methodKey) {
     case 'default':
       method = { _id: 'asc' }
+      break
     case 'name':
       method = { name: 'asc' }
       break
@@ -44,13 +45,12 @@ router.get('/search', (req, res) => {
     .sort(method)
     .exec((err, restaurants) => {
       if (err) return console.error(err)
-      restaurants_results = restaurants.filter(data => {
+      const restaurantsResults = restaurants.filter(data => {
         return data.name.toLowerCase().includes(key.toLowerCase()) || data.category.toLowerCase().includes(key.toLowerCase())
       })
 
-      return res.render('index', { restaurants: restaurants_results, searchKey: key, sortKey: methodKey })
+      return res.render('index', { restaurants: restaurantsResults, searchKey: key, sortKey: methodKey })
     })
-
 })
 
 module.exports = router
