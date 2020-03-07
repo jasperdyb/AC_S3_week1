@@ -29,8 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 // 載入路由器
+app.use('/', require('./routes/main.js'))
 app.use('/restaurants', require('./routes/restaurants.js'))
-app.use('/', require('./routes/index.js'))
+app.use('/users', require('./routes/user.js'))
 
 
 // server start
