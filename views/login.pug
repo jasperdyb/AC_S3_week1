@@ -1,0 +1,15 @@
+extend layouts/main.pug
+
+block view
+  div(class="row mt-5")
+    div(class="col-md-4 m-auto")
+      div(class="card card-body")
+        //- include includes/message.pug
+        form(action="/users/login" method="POST")
+          div(class="form-group")
+            label(for="email") Email
+            input(type="email" id="email" name="email" class="form-control" placeholder="Enter Email" )
+          div( class="form-group")
+            label(for="password") Password
+            input(type="password" id="password" name="password" class="form-control" placeholder="Enter Password")
+          button(type="submit" class="btn btn-primary btn-block") Login
