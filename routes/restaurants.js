@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Restaurants = require('../models/restaurants')
+const { authenticated } = require('../config/auth')
 
 // Index of restaurants
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   const key = null
 
   Restaurants.find()
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
 })
 
 // search result
-router.get('/search', (req, res) => {
+router.get('/search', authenticated, (req, res) => {
   const key = req.query.searchKey
   const methodKey = req.query.sortMethod
   let method = {}
@@ -55,13 +56,13 @@ router.get('/search', (req, res) => {
 
 
 // add new info page
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   const restaurantNull = {}
   res.render('new', { restaurant: restaurantNull })
 })
 
 // info added
-router.post('/new', (req, res) => {
+router.post('/new', authenticated, (req, res) => {
   const restaurant = new Restaurants(req.body)
 
   restaurant.save(err => {
@@ -71,7 +72,7 @@ router.post('/new', (req, res) => {
 })
 
 // detail page
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, (req, res) => {
   Restaurants.findById(req.params.id)
     .lean()
     .exec((err, restaurant) => {
@@ -81,7 +82,7 @@ router.get('/:id', (req, res) => {
 })
 
 // info update page
-router.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', authenticated, (req, res) => {
   Restaurants.findById(req.params.id)
     .lean()
     .exec((err, restaurant) => {
@@ -91,7 +92,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 // info updated
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticated, (req, res) => {
   Restaurants.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     console.log(restaurant)
@@ -106,7 +107,7 @@ router.put('/:id', (req, res) => {
   })
 })
 
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
   Restaurants.findById(req.params.id, (err, restaurants) => {
     if (err) return console.error(err)
     restaurants.remove(err => {
