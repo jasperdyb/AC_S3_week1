@@ -19,7 +19,8 @@ router.post('/login', (req, res, next) => {
 
 // 註冊頁面
 router.get('/register', (req, res) => {
-  res.render('register')
+  registering = true
+  res.render('register', { registering })
 })
 
 // 註冊檢查
@@ -64,7 +65,8 @@ router.post('/register', (req, res) => {
 
 // 登出
 router.get('/logout', (req, res) => {
-
+  req.logout()
+  res.redirect('/')
 })
 
 module.exports = router

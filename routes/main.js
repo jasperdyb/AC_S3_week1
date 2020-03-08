@@ -6,9 +6,9 @@ const { authenticated } = require('../config/authMain')
 // home page
 router.get('/', authenticated, (req, res) => {
   const key = null
-
+  registering = false
   // 載入home.pug
-  res.render('home')
+  res.render('home', registering)
 
 })
 
