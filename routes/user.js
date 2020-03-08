@@ -28,8 +28,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: email }).then(user => {
     if (user) {                                       // 檢查 email 是否存在
-      // 加入訊息提示
-      errors.push({ message: '這個 Email 已經註冊過了' })
+      console.log('user already exist!')
       res.render('register', {                // 使用者已經註冊過
         name,
         email,

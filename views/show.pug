@@ -1,8 +1,10 @@
 extends layouts/main.pug
 
-block view
-  h1(class="mb-1 restaurant-show-title") #{restaurant.name}
+block view 
   div(class="container")
+    div(class="row jumbotron jumbotron-fluid")
+      div(class="container")
+        h1(class="display-4 text-center") #{restaurant.name}
     div(class="row")
       div(class="col-12 col-md-10 mx-auto")
         p(class="mb-1")
