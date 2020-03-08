@@ -7,7 +7,7 @@ const { authenticated } = require('../config/auth')
 router.get('/', authenticated, (req, res) => {
   const key = null
 
-  Restaurants.find()
+  Restaurants.find({ userId: req.user._id })
     .sort({})
     .lean()
     .exec((err, restaurants) => { // 把 model 所有的資料都抓回來
@@ -41,7 +41,7 @@ router.get('/search', authenticated, (req, res) => {
       break
   }
 
-  Restaurants.find()
+  Restaurants.find({ userId: req.user._id })
     .lean()
     .sort(method)
     .exec((err, restaurants) => {
@@ -63,7 +63,9 @@ router.get('/new', authenticated, (req, res) => {
 
 // info added
 router.post('/new', authenticated, (req, res) => {
+  req.body.userId = req.user._id
   const restaurant = new Restaurants(req.body)
+
 
   restaurant.save(err => {
     if (err) return console.error(err)
@@ -73,7 +75,7 @@ router.post('/new', authenticated, (req, res) => {
 
 // detail page
 router.get('/:id', authenticated, (req, res) => {
-  Restaurants.findById(req.params.id)
+  Restaurants.findById({ _id: req.params.id, userId: req.user._id })
     .lean()
     .exec((err, restaurant) => {
       if (err) return console.error(err)
@@ -83,7 +85,7 @@ router.get('/:id', authenticated, (req, res) => {
 
 // info update page
 router.get('/:id/edit', authenticated, (req, res) => {
-  Restaurants.findById(req.params.id)
+  Restaurants.findById({ _id: req.params.id, userId: req.user._id })
     .lean()
     .exec((err, restaurant) => {
       if (err) return console.error(err)
@@ -93,9 +95,9 @@ router.get('/:id/edit', authenticated, (req, res) => {
 
 // info updated
 router.put('/:id', authenticated, (req, res) => {
-  Restaurants.findById(req.params.id, (err, restaurant) => {
+  Restaurants.findById({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
-    console.log(restaurant)
+
     for (var key in req.body) {
       restaurant[key] = req.body[key]
     }
@@ -108,7 +110,7 @@ router.put('/:id', authenticated, (req, res) => {
 })
 
 router.delete('/:id/delete', authenticated, (req, res) => {
-  Restaurants.findById(req.params.id, (err, restaurants) => {
+  Restaurants.findById({ _id: req.params.id, userId: req.user._id }, (err, restaurants) => {
     if (err) return console.error(err)
     restaurants.remove(err => {
       if (err) return console.error(err)
