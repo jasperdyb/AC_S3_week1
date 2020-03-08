@@ -13,7 +13,8 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', { // 使用 passport 認證
     successRedirect: '/restaurants/', // 登入成功會回到根目錄
-    failureRedirect: '/users/login' // 失敗會留在登入頁面
+    failureRedirect: '/users/login',// 失敗會留在登入頁面
+    failureFlash: true
   })(req, res, next)
 })
 
@@ -27,45 +28,68 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body
 
-  User.findOne({ email: email }).then(user => {
-    if (user) {                                       // 檢查 email 是否存在
-      console.log('user already exist!')
-      res.render('register', {                // 使用者已經註冊過
-        name,
-        email,
-        password,
-        password2
-      })
-    } else {
-      const newUser = new User({    // 如果 email 不存在就直接新增
-        name,
-        email,
-        password
-      })
+  // 加入錯誤訊息提示
+  let errors = []
 
-      bcrypt.genSalt(10, (err, salt) =>
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          newUser.password = hash
+  if (!name || !email || !password || !password2) {
+    errors.push({ message: '所有欄位都是必填' })
+  }
 
-          newUser
-            .save()
-            .then(user => {
-              console.log('user added!')
-              res.redirect('/')                         // 新增完成導回首頁
-            })
-            .catch(err => console.log(err))
+  if (password !== password2) {
+    errors.push({ message: '密碼輸入錯誤' })
+  }
 
+  if (errors.length > 0) {
+    res.render('register', {
+      errors,
+      name,
+      email,
+      password,
+      password2
+    })
+  } else {
+    User.findOne({ email: email }).then(user => {
+      if (user) {                                       // 檢查 email 是否存在
+        errors.push({ message: '這個 Email 已經註冊過了' })
+        res.render('register', {
+          errors,               // 使用者已經註冊過
+          name,
+          email,
+          password,
+          password2
+        })
+      } else {
+        const newUser = new User({    // 如果 email 不存在就直接新增
+          name,
+          email,
+          password
         })
 
+        bcrypt.genSalt(10, (err, salt) =>
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            newUser.password = hash
 
-      )
-    }
-  })
+            newUser
+              .save()
+              .then(user => {
+                console.log('user added!')
+                res.redirect('/')                         // 新增完成導回首頁
+              })
+              .catch(err => console.log(err))
+
+          })
+
+
+        )
+      }
+    })
+  }
 })
 
 // 登出
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '您已經成功登出')
   res.redirect('/')
 })
 

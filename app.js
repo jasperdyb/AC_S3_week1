@@ -47,8 +47,21 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
 
-  // res.locals.success_msg = req.flash('success_msg')
-  // res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+
+  //passport authenticate failed 時傳送的錯誤訊息
+  let errorMessage = req.flash('error')[0]
+
+  //將passport預設訊息轉譯
+  switch (errorMessage) {
+    case 'Missing credentials':
+      res.locals.passport_error_msg = '請填寫信箱及密碼'
+      break
+    case 'Email or Password incorrect':
+      res.locals.passport_error_msg = '錯誤的信箱或密碼'
+  }
+
   next()
 })
 
