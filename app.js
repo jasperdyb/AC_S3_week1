@@ -16,7 +16,8 @@ const port = 3000
 //Database connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/restaurant', {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 })
 const db = mongoose.connection
 
