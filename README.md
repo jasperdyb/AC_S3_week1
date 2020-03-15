@@ -2,7 +2,7 @@
 
 Alpha Camp 學期三專案。
 
-建立餐廳清單，並可欣曾、修改、刪除餐廳資料。
+申請使用者後可登入並建立餐廳清單，可新增、修改、刪除餐廳資料。
 
 ## 功能
 
@@ -12,9 +12,7 @@ Alpha Camp 學期三專案。
 - 畫面右下角加號圖示，進入新增餐廳頁面，可編輯並新增餐廳資訊
 - 畫面右下角垃圾桶圖示，可顯示刪除按鈕，點擊並確認後可刪除餐廳資訊。
 - 詳細資訊頁面，畫面右下角鉛筆圖示，可進入修改資訊頁面，可編輯並更新餐廳資訊。
-
-新增:
-- 排序功能
+- 餐廳資訊排序功能
 
 ## 環境建置
 
@@ -27,31 +25,24 @@ Alpha Camp 學期三專案。
 
 
 ```
-git clone https://github.com/jasperdyb/AC_S3_week1
+git clone https://github.com/jasperdyb/AC_S3_restaurants
 ```
 
 2. 進入專案存放的資料夾
 
 ```
-cd (專案根目錄)/AC_S3_week1
+cd AC_S3_restaurants
 ```
 
-3. 安裝 express (需求Node)
+3. 安裝套件
 
 ```
-npm i express
+npm install
 ```
 
-4. 安裝 nodemon (需求Node)
-
+4. 啟動
 ```
-npm i nodemon
-```
-
-5. 安裝完成後啟動伺服器
-
-```
-nodemon app.js
+npm run dev
 ```
 若正確啟動顯示如下
 
@@ -63,9 +54,10 @@ nodemon app.js
 ## Built With
 
 * [Express](https://expressjs.com/zh-tw/) - 網頁框架
-* [handlebars](https://handlebarsjs.com/) - html模板
-* [Bootstrap](https://getbootstrap.com/) 
-* [Fontawesome](https://fontawesome.com/)
+* [Pug](https://pugjs.org/) - html模板
+* [Bootstrap](https://getbootstrap.com/) UI模板
+* [Fontawesome](https://fontawesome.com/) Icon
+* [Passport](http://www.passportjs.org/) 驗證系統
 
 
 
